@@ -220,6 +220,33 @@ VDS = 0.6 V
 Power Dissipation = 0.24 mW  
 
 All design constraints are satisfied, and the device operates in saturation, ensuring proper voltage amplification.
+## Transfer Analysis:
+Transfer characteristics depict how the drain current (Id) varies with the gate-to-source voltage (Vgs).It's ltspice command is ".dc V2 0 2"
+Common-Source NMOS Amplifier: DC Voltage Transfer Characteristic (VTC):
+
+<img width="2975" height="1560" alt="Screenshot 2026-02-24 114651" src="https://github.com/user-attachments/assets/3290d1d9-dc21-4f3a-9f78-522a1579d35f" />
+
+
+
+
+## 1. Cutoff Region ($V_{in} < V_{th}$)
+
+* **On the graph:** The flat horizontal line at the top left, where $V_{in}$ is between **0V** and approximately **0.4V**. 
+* **Circuit behavior:** The input gate voltage is below the transistor's threshold voltage ($V_{th}$). The NMOS is completely turned **OFF**. Because no drain current ($I_D$) is flowing through the **5kΩ** resistor ($R_1$), there is no voltage drop across it. 
+* **Equation:** $$V_{out} = V_{DD} - (I_D \cdot R_1)$$
+  Since $I_D = 0$, $V_{out} = V_{DD} =$ **2.0V**.
+
+## 2. Saturation Region ($V_{in} > V_{th}$ and $V_{out} > V_{in} - V_{th}$)
+
+* **On the graph:** The steep, downward-sloping section in the middle, roughly between $V_{in} =$ **0.4V** and **1.0V**.
+* **Circuit behavior:** As $V_{in}$ exceeds the threshold voltage, the NMOS turns **ON** and enters saturation. It begins to conduct current ($I_D$), which increases quadratically with $V_{in}$. As current flows through $R_1$, the voltage drop across the resistor increases, causing $V_{out}$ at the drain to drop rapidly. 
+* **Significance:** This steep region is where the circuit operates as an amplifier. A small change in the input voltage ($V_{in}$) results in a large, inverted change in the output voltage ($V_{out}$). The slope of this line represents the voltage gain of the amplifier.
+
+## 3. Triode / Linear Region ($V_{in} > V_{th}$ and $V_{out} < V_{in} - V_{th}$)
+
+* **On the graph:** The flattened-out section on the bottom right, starting around $V_{in} =$ **1.2V** and extending to **2.0V**.
+* **Circuit behavior:** As $V_{in}$ continues to increase, $V_{out}$ drops so low that the transistor leaves saturation and enters the triode region. Here, the MOSFET acts like a voltage-controlled resistor. The curve flattens out because the transistor's "on-resistance" is very low, pulling $V_{out}$ close to ground (**0V**), but it doesn't reach a perfect zero due to that small residual resistance.
+
 
 # DC Analysis
 
@@ -293,19 +320,42 @@ The MOSFET operates in the **Saturation Region**.
 
 
 
-- Midband Gain = 5.315 dB  
-- Frequency ≈ 3.15 GHz  
-- Phase ≈ 169.7°
 
-Convert gain to linear:
+### Midband Gain
 
-Av = 10^(5.265/20)
+<img width="2997" height="1607" alt="image" src="https://github.com/user-attachments/assets/1f036a09-a810-4af3-a498-3008f4176a25" />
 
-Av ≈ 1.83
+$$
+A_v \approx 5.315\,dB
+$$
+
+### Half-Power (-3 dB) Frequency
+
+$$
+5.315- 3 = 2.315\,dB
+$$
+
+From the graph, gain reaches 2.315 dB at approximately:
+
+$$
+f_H \approx 33.87\,GHz
+$$
+
+### Bandwidth
+
+Since no low-frequency cutoff is observed:
+
+$$
+BW = f_H
+$$
+
+$$
+BW \approx 33.87\,GHz
+$$
 
 Final Gain:
 
-Av ≈ −1.83
+Av ≈ −1.8439
 
 (negative sign indicates phase inversion)
 
@@ -319,10 +369,10 @@ Av ≈ −1.83
 | RD | 3kΩ |
 | ID | 200 µA |
 | DC Output | 0.5987 V |
-| Midband Gain | 5.26 dB |
-| Linear Gain | 1.83 |
+| Midband Gain | 5.315 dB |
+| Linear Gain | 1.8439 |
 | Phase Shift | ~180° |
-| Bandwidth | GHz Range |
+| Bandwidth | 33.87GHz Range |
 
 ---
 
@@ -338,7 +388,7 @@ Av ≈ −1.83
 
 ##Conclusion
 
-The Common Source amplifier designed using 180nm CMOS technology operates in saturation and provides stable DC bias, moderate voltage gain (~1.83), 180° phase inversion, and high-frequency bandwidth.
+The Common Source amplifier designed using 180nm CMOS technology operates in saturation and provides stable DC bias, moderate voltage gain (~1.84), 180° phase inversion, and high-frequency bandwidth.
 
 
 
