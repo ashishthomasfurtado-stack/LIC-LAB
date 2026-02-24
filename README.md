@@ -36,14 +36,7 @@ Av = −gm * RD
 Equation of drain current for saturation region of operation of MOSFET 
 
 ID = (1/2) * μn * Cox * (W/L) * (VGS - VTH)^2
-## DC Analysis
-DC analysis means to find the operational point (bias point) MOSFET by calculating some different DC voltages and currents at various nodes of the circuit. For a common source amplifier, we should find the drain current (ID), gate-source voltage (VGS), and check whether the MOSFET is working in cut-off, triode, or saturation regions. It is important to perform the DC analysis since this sets the amplifier for the correct operational bias state before applying an AC signal. In LTspice, the DC analysis is performed using the .op command.
-## AC analysis 
-AC analysis depicts how the amplifier's gain (𝐴𝑣A v​ ) changes with frequency as it is a critical way of studying the frequency response of the amplifier. It also identifies the bandwidth, the -3dB cutoff frequency, and how the amplifier behaves at different frequencies. AC analysis also assumes that there will be small-signal operation; thus, the MOSFET behavior will have to be linearized around its bias point. AC analysis is done in LTspice using the .ac dec 20 0.1 1T command, which sweeps the frequency from 0.1 Hz to 1 THz.
-Ac gain can be calulated using equation Av = -gm *Rd
-
-## Transient analysis
-Transient analysis has been performed to track how the output voltage waveform changes over time with the applied AC input signal. This analysis is further employed to see how amplifiers affect the real-time behavior, including signal amplification and the distortions involved. This helps visualize how the circuit responds to different waveforms such as sine waves or pulses. In LTspice, the transient analysis is done by means of the .tran 5 m command to run the simulation for 5 milliseconds and observe a real-time description of the circuit's activity.
+.
 ## Procedure 
 
 Step 1: Open LTspice and create a New schematic Open LTspice, navigate to file to New Schematic .Save the schematic with an appropriate name.
@@ -220,8 +213,8 @@ VDS = 0.6 V
 Power Dissipation = 0.24 mW  
 
 All design constraints are satisfied, and the device operates in saturation, ensuring proper voltage amplification.
-## Transfer Analysis:
-Transfer characteristics depict how the drain current (Id) varies with the gate-to-source voltage (Vgs).It's ltspice command is ".dc V2 0 2"
+## DC Sweep:
+DC Sweep (Transfer characteristics )depict how the drain current (Id) varies with the gate-to-source voltage (Vgs).It's ltspice command is ".dc V2 0 2"
 Common-Source NMOS Amplifier: DC Voltage Transfer Characteristic (VTC):
 
 <img width="2975" height="1560" alt="Screenshot 2026-02-24 114651" src="https://github.com/user-attachments/assets/3290d1d9-dc21-4f3a-9f78-522a1579d35f" />
@@ -229,24 +222,10 @@ Common-Source NMOS Amplifier: DC Voltage Transfer Characteristic (VTC):
 
 
 
-## 1. Cutoff Region ($V_{in} < V_{th}$)
 
-* **On the graph:** The flat horizontal line at the top left, where $V_{in}$ is between **0V** and approximately **0.4V**. 
-* **Circuit behavior:** The input gate voltage is below the transistor's threshold voltage ($V_{th}$). The NMOS is completely turned **OFF**. Because no drain current ($I_D$) is flowing through the **5kΩ** resistor ($R_1$), there is no voltage drop across it. 
-* **Equation:** $$V_{out} = V_{DD} - (I_D \cdot R_1)$$
-  Since $I_D = 0$, $V_{out} = V_{DD} =$ **2.0V**.
+**Fig:** DC transfer characteristic of the Common Source amplifier showing $V_{out}$ versus $V_{in}$.
 
-## 2. Saturation Region ($V_{in} > V_{th}$ and $V_{out} > V_{in} - V_{th}$)
-
-* **On the graph:** The steep, downward-sloping section in the middle, roughly between $V_{in} =$ **0.4V** and **1.0V**.
-* **Circuit behavior:** As $V_{in}$ exceeds the threshold voltage, the NMOS turns **ON** and enters saturation. It begins to conduct current ($I_D$), which increases quadratically with $V_{in}$. As current flows through $R_1$, the voltage drop across the resistor increases, causing $V_{out}$ at the drain to drop rapidly. 
-* **Significance:** This steep region is where the circuit operates as an amplifier. A small change in the input voltage ($V_{in}$) results in a large, inverted change in the output voltage ($V_{out}$). The slope of this line represents the voltage gain of the amplifier.
-
-## 3. Triode / Linear Region ($V_{in} > V_{th}$ and $V_{out} < V_{in} - V_{th}$)
-
-* **On the graph:** The flattened-out section on the bottom right, starting around $V_{in} =$ **1.2V** and extending to **2.0V**.
-* **Circuit behavior:** As $V_{in}$ continues to increase, $V_{out}$ drops so low that the transistor leaves saturation and enters the triode region. Here, the MOSFET acts like a voltage-controlled resistor. The curve flattens out because the transistor's "on-resistance" is very low, pulling $V_{out}$ close to ground (**0V**), but it doesn't reach a perfect zero due to that small residual resistance.
-
+**Fig 1:** DC transfer characteristic of the CS amplifier ($V_{out}$ vs $V_{in}$).
 
 # DC Analysis
 
