@@ -204,28 +204,7 @@ W ≈ 1.07 µm
 
 ---
 
-## **FINAL DESIGN VALUES**
 
-ID = 200 µA  
-RD = 3 kΩ  
-Calculated Width (W) ≈ 1.07 µm  
-VDS = 0.6 V  
-Power Dissipation = 0.24 mW  
-
-All design constraints are satisfied, and the device operates in saturation, ensuring proper voltage amplification.
-## DC Sweep:
-DC Sweep (Transfer characteristics )depict how the drain current (Id) varies with the gate-to-source voltage (Vgs).It's ltspice command is ".dc V2 0 2"
-Common-Source NMOS Amplifier: DC Voltage Transfer Characteristic (VTC):
-
-<img width="2975" height="1560" alt="Screenshot 2026-02-24 114651" src="https://github.com/user-attachments/assets/3290d1d9-dc21-4f3a-9f78-522a1579d35f" />
-
-
-
-
-
-**Fig:** DC transfer characteristic of the Common Source amplifier showing $V_{out}$ versus $V_{in}$.
-
-**Fig 1:** DC transfer characteristic of the CS amplifier ($V_{out}$ vs $V_{in}$).
 
 # DC Analysis
 
@@ -237,6 +216,10 @@ Common-Source NMOS Amplifier: DC Voltage Transfer Characteristic (VTC):
 
 
 ### Operating Point Results
+| Length (nm) | Width (µm) | Id (µA) |
+|-------------|------------|---------|
+| 180        | 1.07       | 140    |
+| 180        | 1.63      | 200.4   |
 
 - VDD = 1.2 V  
 - Vin (DC Offset) = 0.9 V  
@@ -254,6 +237,29 @@ VDS > (VGS − VTH)
 The MOSFET operates in the **Saturation Region**.
 
 ---
+
+## **FINAL DESIGN VALUES**
+
+ID = 200 µA  
+RD = 3 kΩ  
+Calculated Width (W) ≈ 1.63 µm  
+VDS = 0.6 V  
+Power Dissipation = 0.24 mW  
+
+All design constraints are satisfied, and the device operates in saturation, ensuring proper voltage amplification.
+## DC Sweep:
+DC Sweep (Transfer characteristics )depict how the drain current (Id) varies with the gate-to-source voltage (Vgs).It's ltspice command is ".dc V2 0 2"
+Common-Source NMOS Amplifier: DC Voltage Transfer Characteristic (VTC):
+
+<img width="2975" height="1560" alt="Screenshot 2026-02-24 114651" src="https://github.com/user-attachments/assets/3290d1d9-dc21-4f3a-9f78-522a1579d35f" />
+
+
+
+
+
+**Fig:** DC transfer characteristic of the Common Source amplifier showing $V_{out}$ versus $V_{in}$.
+
+**Fig 1:** DC transfer characteristic of the CS amplifier ($V_{out}$ vs $V_{in}$).
 # Transient Analysis
 <img width="2997" height="1611" alt="Screenshot 2026-02-24 115144" src="https://github.com/user-attachments/assets/276112af-f297-4168-a7d9-32646b08a2fa" />
 <img width="584" height="379" alt="Screenshot 2026-02-24 115316" src="https://github.com/user-attachments/assets/95f2bc9b-3cef-4510-bbca-c398d51d7efa" />
